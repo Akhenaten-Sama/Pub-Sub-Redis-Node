@@ -33,7 +33,7 @@ var subscribers = []
 app.post('/publish/:topic',(req,res) => {
     const message = req.body;
     const topic = req.params.topic;
-       console.log(message)
+       
     try{
       publisher.publish(topic,JSON.stringify(message))
       res.status(200).send("Message has been published");
@@ -60,12 +60,13 @@ subscribers.push(url)
 	} catch (err) {
 		res.status(501).send('unable to subscribe');
 	}
-	console.log(topic);
+	
 });
 
-
+// once redis sends pack the payload, it is published to the  subscribers
 subscriber.on('message', (topic, data) => {
-  console.log({ topic, data });
+
+  //each subscriber is sent the payload
   subscribers.map(sub=>{
     fetch({
       method:'post',
@@ -74,7 +75,7 @@ subscriber.on('message', (topic, data) => {
         topic:topic,
         data:data
       },
-      header:{'Content-Type':'application/x-www-form-urlencoded'}
+      header:{'Content-Type':'application/json'}
     
     }).then(result => console.log('sent'))
     .catch(err=> console.log('error'))
