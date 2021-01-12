@@ -1,5 +1,4 @@
 This is my answer for the Pangaea Takehome.
-git re
 
 nmp run start =>> starts the Publisher server
 
