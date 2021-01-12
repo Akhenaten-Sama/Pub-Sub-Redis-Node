@@ -6,15 +6,16 @@ const dotenv = require('dotenv');
 dotenv.config()
 
 
-
+//config for redis
 const CONFIG = {
   url:process.env.URL,
   host:process.env.HOST,
   password:process.env.PASSWORD
 }
+
+
+//the publisher and subscriber
 const publisher = redis.createClient(CONFIG);
-
-
 const subscriber = redis.createClient(CONFIG);
 
 
@@ -24,8 +25,11 @@ const app = express();
 app.use(express.json())
 app.use(cors())
 
-
+//stores our list of subscribers
 var subscribers = []
+
+
+//publishing endpoint
 app.post('/publish/:topic',(req,res) => {
     const message = req.body;
     const topic = req.params.topic;
@@ -41,6 +45,8 @@ app.post('/publish/:topic',(req,res) => {
 
 
 
+
+//subscription endpoint
 app.post('/subscribe/:topic', (req, res) => {
 	var topic = req.params.topic;
 	var url = req.body.url;

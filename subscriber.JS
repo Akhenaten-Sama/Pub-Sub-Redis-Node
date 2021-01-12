@@ -7,7 +7,7 @@ const app = express();
 app.use(express.json());
 app.use(cors())
 
-
+// subscriber url 1
 app.post('/test1', (req,res)=>{
     const data = req.body
     console.log(data)
@@ -16,6 +16,8 @@ app.post('/test1', (req,res)=>{
     
 })
 
+
+//subscriber url 2
 app.post('/test2', (req,res)=>{
     const data = req.body
     console.log(data)
