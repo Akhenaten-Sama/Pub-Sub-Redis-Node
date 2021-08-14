@@ -8,7 +8,7 @@ dotenv.config()
 
 //config for redis
 const CONFIG = {
-  url:process.env.URL,
+  url:null,
   host:process.env.HOST,
   password:process.env.PASSWORD
 }
